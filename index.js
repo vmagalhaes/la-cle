@@ -14,7 +14,7 @@ async function run() {
     const GH_SSH_KEY = core.getInput("GH_SSH_KEY", { required: true });
     fs.mkdirSync(sshDirectory, { recursive: true, mode: 0o700 });
 
-    const id_rsa = path.join(sshDirectory, "pioug_la_cle");
+    const id_rsa = path.join(sshDirectory, "one_la_cle");
     fs.writeFileSync(id_rsa, `${GH_SSH_KEY}\n`, { mode: 0o600 });
 
     const config = path.join(sshDirectory, 'config');
@@ -23,7 +23,7 @@ async function run() {
       fs.appendFileSync(config, `\n${IdentityFile}`);
     }
 
-    await exec(`ssh-keyscan -H github.com > ${path.join(sshDirectory, 'known_hosts')}`);
+    await exec(`ssh-keyscan -H atc-github.azure.cloud.bmw > ${path.join(sshDirectory, 'known_hosts')}`);
 
     const cmd =
       {
