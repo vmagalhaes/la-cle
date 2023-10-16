@@ -24,7 +24,7 @@ async function run() {
     }
 
     await exec(`ssh-keyscan -H atc-github.azure.cloud.bmw > ${path.join(sshDirectory, 'known_hosts')}`);
-    await exec(`eval $(ssh-agent -s)`);
+    await exec('eval `ssh-agent -s`');
     console.log('Starts running the command, key: ', id_rsa);
     await exec(`ssh-add ${id_rsa}`);
   } catch (error) {
